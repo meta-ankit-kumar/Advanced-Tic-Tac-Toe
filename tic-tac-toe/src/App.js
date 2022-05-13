@@ -6,7 +6,9 @@ function App() {
       TIC TAC TOE
 
 
-      
+
+
+
     </div>
   );
 }

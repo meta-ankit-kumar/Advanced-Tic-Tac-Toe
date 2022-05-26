@@ -4,6 +4,8 @@
  */
 export const Main = (props) => {
     return (
-        <div>TIC TAC TOE</div>
+        <h1>
+            Tic Tac Toe is coming
+        </h1>
     );
 }

@@ -1,10 +1,8 @@
 import './App.css';
-
+import { Main } from './components/main.component';
 function App() {
   return (
-    <div>
-      TIC TAC TOE
-    </div>
+    <Main/>
   );
 }
 

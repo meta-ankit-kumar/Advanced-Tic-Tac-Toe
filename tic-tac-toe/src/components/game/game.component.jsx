@@ -1,5 +1,5 @@
 export const Game = () => {
-    return (
-        <h1>Game Component</h1>
-    );
-}
+	return (
+		<h1>Game Component</h1>
+	);
+};

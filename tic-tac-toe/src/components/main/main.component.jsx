@@ -1,18 +1,25 @@
 import { Form } from '../form/form.component';
 import { Game } from '../game/game.component';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route
+} from 'react-router-dom';
 import Loading from '../loading/loading.component';
-
+  
 /**
  * Main component 
  * @param {*} props Properties
  */
 export const Main = () => {
 	return (
-		<h1>
-            Tic Tac Toe is coming.... Ankit Bishnoi is heading this project Continue.
-			<Loading/>
-			<Game/>
-			<Form/>
-		</h1>
+		<Router basename='Advanced-Tic-Tac-Toe'>
+			<Routes>
+				<Route path='/form' element={<Form/>}/>
+				<Route path='/home' element={<Form/>}/>
+				<Route path='/game' element={<Game/>}/>
+				<Route path='/loading' element={<Loading/>}/>
+			</Routes>
+		</Router>
 	);
 };

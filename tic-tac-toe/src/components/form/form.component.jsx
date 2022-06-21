@@ -19,8 +19,8 @@ const getBorderColor = (name) => {
 	return BORDER_COLORS.ERROR.description;
 };
 
-export const Form = () => {
-	const [name, setName] = useState('');
+// eslint-disable-next-line react/prop-types
+export const Form = ({ name, setName}) => {
 	const [nameError, setNameError] = useState('');
 
 	useEffect(() => {

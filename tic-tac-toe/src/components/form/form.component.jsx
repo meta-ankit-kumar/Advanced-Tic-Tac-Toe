@@ -7,6 +7,18 @@ import { BORDER_COLORS, INVALID_NAME_ERROR } from './constants';
 
 let ignoreFirstTime = true;
 
+const getBorderColor = (name) => {
+	if (name.length || ignoreFirstTime) {
+		if(isValidName(name, ignoreFirstTime)) {
+			return BORDER_COLORS.SUCCESS.description;
+		}
+		else {
+			return BORDER_COLORS.ERROR.description;
+		}
+	}
+	return BORDER_COLORS.ERROR.description;
+};
+
 export const Form = () => {
 	const [name, setName] = useState('');
 	const [nameError, setNameError] = useState('');
@@ -18,17 +30,6 @@ export const Form = () => {
 			setNameError(INVALID_NAME_ERROR.description);
 	}, [name]);
 
-	const getBorderColor = (name) => {
-		if (name.length || ignoreFirstTime) {
-			if(isValidName(name, ignoreFirstTime)) {
-				return BORDER_COLORS.SUCCESS.description;
-			}
-			else {
-				return BORDER_COLORS.ERROR.description;
-			}
-		}
-		return BORDER_COLORS.ERROR.description;
-	};
 	const handleInput = (event) => {
 		setName(event.target.value);
 		ignoreFirstTime = false;
@@ -37,7 +38,7 @@ export const Form = () => {
 		<div className='form-component'>
 			<Grid sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', marginLeft: '15px'}}>
 				<div className='input-field'>
-					<TextField className='text-field' onInput={handleInput} variant="filled" placeholder='Your name' color={getBorderColor(name)} inputProps={{ style: { color: 'white', fontSize: '2.5rem'} }} focused />
+					<TextField className='text-field' onInput={handleInput} variant="filled" placeholder='Your name' color={getBorderColor(name)} inputProps={{ style: { color: 'white', fontSize: '2.5rem'} }} autoFocus focused />
 					<p className='errors-section'>{nameError}</p>
 				</div>
 				<div>

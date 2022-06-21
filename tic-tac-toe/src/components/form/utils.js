@@ -10,6 +10,7 @@ export const isSubmitButtonDisabled = (name) => {
 	return false;
 };
 
-export const isValidName = (name) => {
+export const isValidName = (name, ignoreFirstTime) => {
+	if (ignoreFirstTime) return true;
 	return /[A-Za-z ]$/.test(name);
 };

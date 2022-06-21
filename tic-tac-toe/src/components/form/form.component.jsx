@@ -5,31 +5,33 @@ import { useEffect, useState } from 'react';
 import { isValidName, handleSubmit, isSubmitButtonDisabled } from './utils';
 import { BORDER_COLORS, INVALID_NAME_ERROR } from './constants';
 
+let ignoreFirstTime = true;
 
 export const Form = () => {
 	const [name, setName] = useState('');
 	const [nameError, setNameError] = useState('');
 
 	useEffect(() => {
-		if (isValidName(name))
+		if (isValidName(name, ignoreFirstTime))
 			setNameError('');
 		else 
 			setNameError(INVALID_NAME_ERROR.description);
 	}, [name]);
 
 	const getBorderColor = (name) => {
-		if (name.length) {
-			if(isValidName(name)) {
+		if (name.length || ignoreFirstTime) {
+			if(isValidName(name, ignoreFirstTime)) {
 				return BORDER_COLORS.SUCCESS.description;
 			}
 			else {
 				return BORDER_COLORS.ERROR.description;
 			}
 		}
-		return BORDER_COLORS.SUCCESS.description;
+		return BORDER_COLORS.ERROR.description;
 	};
 	const handleInput = (event) => {
 		setName(event.target.value);
+		ignoreFirstTime = false;
 	};
 	return (
 		<div className='form-component'>

@@ -20,7 +20,7 @@ const getBorderColor = (name) => {
 };
 
 // eslint-disable-next-line react/prop-types
-export const Form = ({ name, setName}) => {
+export const Form = ({ name, setName, setCurrentPage}) => {
 	const [nameError, setNameError] = useState('');
 
 	useEffect(() => {
@@ -42,7 +42,7 @@ export const Form = ({ name, setName}) => {
 					<p className='errors-section'>{nameError}</p>
 				</div>
 				<div>
-					<Button disabled={isSubmitButtonDisabled(name)} onClick={() => handleSubmit(name)}>
+					<Button type='submit' disabled={isSubmitButtonDisabled(name)} onSubmit={() => handleSubmit(name, setCurrentPage)} onClick={() => handleSubmit(name, setCurrentPage)}>
 						<ChevronRightIcon sx={{ fontSize: '6rem'}} color={getBorderColor(name)}/>
 					</Button>
 				</div>

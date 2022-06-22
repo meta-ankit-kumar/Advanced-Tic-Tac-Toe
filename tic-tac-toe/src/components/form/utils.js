@@ -1,7 +1,7 @@
-export const handleSubmit = (name) => {
-	console.log(
-		'In Handle submit', name
-	);
+import { PAGE_NAME } from '../../shared/constants';
+
+export const handleSubmit = (name, setCurrentPage) => {
+	setCurrentPage(PAGE_NAME.SELECTION);
 };
 
 export const isSubmitButtonDisabled = (name) => {

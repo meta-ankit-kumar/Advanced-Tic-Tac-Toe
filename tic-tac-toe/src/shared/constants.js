@@ -1,0 +1,5 @@
+export const PAGE_NAME = {
+	FORM: 'FORM',
+	GAME: 'GAME',
+	SELECTION: 'SELECTION'
+};

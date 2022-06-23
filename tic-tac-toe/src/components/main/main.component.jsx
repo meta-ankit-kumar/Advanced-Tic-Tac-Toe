@@ -24,7 +24,11 @@ export const Main = () => {
 		case PAGE_NAME.GAME:
 			return (<Game name={name}/>);
 		case PAGE_NAME.SELECTION:
-			return (<Selection name={name}/>);
+			return (<Selection name={name} setCurrentPage={setCurrentPage}/>);
+		case PAGE_NAME.PLAY_VS_FRIEND:
+			return (<h1>Play With Friend</h1>);
+		case PAGE_NAME.PLAY_VS_COMPUTER:
+			return (<h1>Play With Computer</h1>);
 		default:
 			break;
 		}

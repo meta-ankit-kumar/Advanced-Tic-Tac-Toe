@@ -1,7 +1,9 @@
 import './selection.css';
 import { Button, Typography } from '@mui/material';
+import { USER_CHOICE } from '../../shared/constants';
 // eslint-disable-next-line react/prop-types
-export const Selection = ({ name }) => {
+export const Selection = ({ name, setCurrentPage }) => {
+	console.log('setCurrentPage', setCurrentPage);
 	return (
 		<div className='selection-container'>
 			<div>
@@ -14,8 +16,12 @@ export const Selection = ({ name }) => {
 					</Typography>
 				</div>
 				<div className='container button-container'>
-					<Button variant="contained" color="info" sx={{ margin: '1rem' }}>A Friend</Button>
-					<Button variant="contained" color="success">The Computer</Button>
+					<Button variant="contained" color="info" sx={{ margin: '1rem' }} onClick={() => setCurrentPage(USER_CHOICE.A_FRIEND.description)}>
+						{USER_CHOICE.A_FRIEND.description}
+					</Button>
+					<Button variant="contained" color="success" onClick={() => setCurrentPage(USER_CHOICE.THE_COMPUTER.description)}>
+						{USER_CHOICE.THE_COMPUTER.description}
+					</Button>
 				</div>
 			</div>
 		</div>

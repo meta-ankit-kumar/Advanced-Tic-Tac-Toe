@@ -1,0 +1,21 @@
+.selection-heading {
+	color: brown;
+	padding-inline: 0.4rem;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.button-container {
+	padding-top: 8%;
+}
+
+.selection-container {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

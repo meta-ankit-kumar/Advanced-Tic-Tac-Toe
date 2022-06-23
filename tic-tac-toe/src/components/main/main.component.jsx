@@ -24,7 +24,7 @@ export const Main = () => {
 		case PAGE_NAME.GAME:
 			return (<Game name={name}/>);
 		case PAGE_NAME.SELECTION:
-			return (<Selection/>);
+			return (<Selection name={name}/>);
 		default:
 			break;
 		}

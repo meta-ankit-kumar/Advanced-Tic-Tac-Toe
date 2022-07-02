@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/Advanced-Tic-Tac-Toe/static/css/main.ae467c7a.css",
-    "main.js": "/Advanced-Tic-Tac-Toe/static/js/main.e843c52f.js",
+    "main.css": "/Advanced-Tic-Tac-Toe/static/css/main.6831aa64.css",
+    "main.js": "/Advanced-Tic-Tac-Toe/static/js/main.0e475568.js",
     "static/js/787.393238a3.chunk.js": "/Advanced-Tic-Tac-Toe/static/js/787.393238a3.chunk.js",
+    "static/media/coin-front.png": "/Advanced-Tic-Tac-Toe/static/media/coin-front.95bdfa1e6b2ef7426f93.png",
+    "static/media/coin-back.png": "/Advanced-Tic-Tac-Toe/static/media/coin-back.6f30cf71e323a393dc5d.png",
     "index.html": "/Advanced-Tic-Tac-Toe/index.html",
-    "main.ae467c7a.css.map": "/Advanced-Tic-Tac-Toe/static/css/main.ae467c7a.css.map",
-    "main.e843c52f.js.map": "/Advanced-Tic-Tac-Toe/static/js/main.e843c52f.js.map",
+    "main.6831aa64.css.map": "/Advanced-Tic-Tac-Toe/static/css/main.6831aa64.css.map",
+    "main.0e475568.js.map": "/Advanced-Tic-Tac-Toe/static/js/main.0e475568.js.map",
     "787.393238a3.chunk.js.map": "/Advanced-Tic-Tac-Toe/static/js/787.393238a3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ae467c7a.css",
-    "static/js/main.e843c52f.js"
+    "static/css/main.6831aa64.css",
+    "static/js/main.0e475568.js"
   ]
 }

@@ -1,21 +1,27 @@
+/* eslint-disable no-unused-vars */
 import { Button } from '@mui/material';
 import { useState } from 'react';
 import './toss.css';
-
+import front from '../../assets/images/coin-front.png';
+import back from '../../assets/images/coin-back.png';
 
 const getStyleClass = (tossState) => {
 	switch (tossState) {
-	case 'NOT_STARTED':
-		return 'tail-side coin';
+	case ['NOT_STARTED', 'HEAD_WON', 'TAIL_WON'].includes(tossState):
+		return '';
 	case 'IN_PROGRESS':
-		return 'tail-side coin-animation coin';
-	case 'HEAD_WON':
-		return 'head-side coin';
-	case 'TAIL_WON':
-		return 'tail-side coin';
+		return 'coin-animation';
 	default:
 		break;
 	}
+};
+
+const getCoinAccordingToTheResult = (tossState) => {
+	if (tossState === 'HEAD_WON')
+		return back;
+	else if (tossState === 'TAIL_WON')
+		return front;
+	return front;
 };
 
 const wait = async (time) => {
@@ -46,8 +52,9 @@ export const Toss = () => {
 	return (
 		<>
 			<div className='toss-container'>
-				<div className={getStyleClass(tossState)}>
-				</div>
+				<img src={getCoinAccordingToTheResult(tossState)} height='110' className={getStyleClass(tossState)}/>
+				{/* <div className={getStyleClass(tossState)}>
+				</div> */}
 			</div>
 			<>
 				<div className='button-container'>

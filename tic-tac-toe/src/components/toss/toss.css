@@ -3,20 +3,6 @@
 	animation-duration: 5s;
 }
 
-.coin {
-	width: 20%;
-	height: 8rem;
-	position: absolute;
-	background-size: contain;
-	background-repeat: no-repeat;
-}
-.tail-side {
-	background-image: url('../../../public/coin-front.png');
-}
-
-.head-side {
-	background-image: url('../../../public/coin-back.png');
-}
 
 @keyframes rotate-and-transform-coin {
 	30% {
@@ -30,7 +16,7 @@
 .toss-container {
 	display: flex;
 	width: 100%;
-	align-items: center;
+	align-items: flex-end;
 	justify-content: center;
 	height: 80vh;
 }

@@ -10,6 +10,7 @@
 	}
 	100% {
 		transform: translateY(0px) rotateX(0deg);
+		filter: blur(2px);
 	}
 }
 

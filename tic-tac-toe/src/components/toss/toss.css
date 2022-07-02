@@ -1,0 +1,44 @@
+.coin-animation {
+	animation-name: rotate-and-transform-coin;
+	animation-duration: 5s;
+}
+
+.coin {
+	width: 20%;
+	height: 8rem;
+	position: absolute;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+.tail-side {
+	background-image: url('../../../public/coin-front.png');
+}
+
+.head-side {
+	background-image: url('../../../public/coin-back.png');
+}
+
+@keyframes rotate-and-transform-coin {
+	30% {
+		transform: translateY(-400px) rotateX(1260deg);
+	}
+	100% {
+		transform: translateY(0px) rotateX(0deg);
+	}
+}
+
+.toss-container {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	height: 80vh;
+}
+
+.button-container {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	
+}

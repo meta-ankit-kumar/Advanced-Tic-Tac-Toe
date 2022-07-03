@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { Button } from '@mui/material';
-import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
 import './toss.css';
 import front from '../../assets/images/coin-front.png';
 import back from '../../assets/images/coin-back.png';
+import { TossSelection } from '../tossSelection/tossSelection.component';
+import 'react-toastify/dist/ReactToastify.css';
 
 const getStyleClass = (tossState) => {
 	switch (tossState) {
@@ -40,8 +43,10 @@ const tossCoin = async () => {
 };
 
 
-export const Toss = () => {
+// eslint-disable-next-line react/prop-types
+export const Toss = ({ firstPlayerName, secondPlayerName }) => {
 	const [tossState, setTossState] = useState('NOT_STARTED');
+	const [firstPlayerChoice, setFirstPlayerChoice] = useState(undefined);
 
 	const handleButtonClick = async () => {
 		setTossState('IN_PROGRESS');
@@ -49,8 +54,21 @@ export const Toss = () => {
 		console.log('Result', result);
 		setTossState(result);
 	};
+
+	useEffect(() => {
+		if (firstPlayerChoice) {
+			toast.info(`${firstPlayerName} has selected ${firstPlayerChoice}`);
+			console.log('Toast event has fired');
+		}
+	}, [firstPlayerChoice]);
+	if (!firstPlayerChoice) {
+		return (
+			<TossSelection firstPlayerName={firstPlayerName} secondPlayerName={secondPlayerName} setFirstPlayerChoice={setFirstPlayerChoice}/>
+		);
+	}
 	return (
 		<>
+			<ToastContainer/>
 			<div className='toss-container'>
 				<img src={getCoinAccordingToTheResult(tossState)} height='110' className={getStyleClass(tossState)}/>
 				{/* <div className={getStyleClass(tossState)}>

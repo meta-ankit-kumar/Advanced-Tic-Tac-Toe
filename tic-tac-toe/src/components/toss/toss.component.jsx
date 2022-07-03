@@ -20,9 +20,9 @@ const getStyleClass = (tossState) => {
 };
 
 const getCoinAccordingToTheResult = (tossState) => {
-	if (tossState === 'HEAD_WON')
+	if (tossState === 'HEADS_WON')
 		return back;
-	else if (tossState === 'TAIL_WON')
+	else if (tossState === 'TAILS_WON')
 		return front;
 	return front;
 };
@@ -38,8 +38,8 @@ const tossCoin = async () => {
 	await wait(4800);
 	const result = Math.floor((Math.random() * 2) + 1);
 	if (result === 1)
-		return 'TAIL_WON';
-	return 'HEAD_WON';
+		return 'TAILS_WON';
+	return 'HEADS_WON';
 };
 
 
@@ -53,6 +53,10 @@ export const Toss = ({ firstPlayerName, secondPlayerName }) => {
 		const result = await tossCoin();
 		console.log('Result', result);
 		setTossState(result);
+		if (result.split('_')[0].includes(firstPlayerChoice.toUpperCase()))
+			toast.success(`${firstPlayerName} has won the toss`);
+		else
+			toast.success(`${secondPlayerName} has won the toss`);
 	};
 
 	useEffect(() => {

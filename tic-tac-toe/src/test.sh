@@ -8,9 +8,9 @@ function printFiles() {
 		then
 			echo "$eachfile is a directory"
 			childfolder=`ls "$eachfile"`
-	   		for new in $childfolder
+	   		for child in $childfolder
 			do
-	   			echo "$new"
+	   			echo "$child"
 			done
 		else
 		     echo "$eachfile"

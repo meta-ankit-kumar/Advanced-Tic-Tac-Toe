@@ -1,7 +1,6 @@
 {
   "name": "tic-tac-toe",
   "version": "0.1.0",
-  "homepage": "https://meta-ankit-kumar.github.io/Advanced-Tic-Tac-Toe",
   "private": false,
   "dependencies": {
     "@emotion/react": "^11.9.0",

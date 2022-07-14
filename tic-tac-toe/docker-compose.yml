@@ -5,7 +5,25 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     ports:
-      - "8400:3000"
+      - "3100:3000"
     volumes:
       - /usr/app/node_modules
       - .:/usr/app
+  server:
+    build:
+      context: ../server
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3300:3100"
+    # volumes:
+    #   - /usr/app/node_modules
+    #   - .:/usr/app
+  mypostgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5555:5432"
+    environment:
+      POSTGRES_PASSWORD: ankit
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres

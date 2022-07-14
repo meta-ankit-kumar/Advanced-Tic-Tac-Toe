@@ -1,0 +1,13 @@
+{
+  "name": "Advanced-Tic-Tac-Toe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/meta-ankit-kumar/Advanced-Tic-Tac-Toe.git",
+  "author": "Ankit Kumar <ankit.kumar@financialforce.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "pg": "^8.7.3"
+  }
+}

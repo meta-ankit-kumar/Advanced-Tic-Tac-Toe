@@ -1,20 +1,22 @@
 version: '3'
 services:
-  dev:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "3100:3000"
-    volumes:
-      - /usr/app/node_modules
-      - .:/usr/app
-  server:
+  # dev:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     - "3003:3001"
+  #   volumes:
+  #     - /usr/app/node_modules
+  #     - .:/usr/app
+  nodeserver:
     build:
       context: ../server
       dockerfile: Dockerfile.dev
-    ports:
-      - "3300:3100"
+    depends_on:
+      - mypostgres
+    # ports:
+    #   - "3003:3001"
     # volumes:
     #   - /usr/app/node_modules
     #   - .:/usr/app
@@ -27,3 +29,12 @@ services:
       POSTGRES_PASSWORD: ankit
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
+  
+  frontend:
+    restart: always
+    build: 
+      context: .
+    depends_on:
+      - nodeserver
+    ports:
+      - "80:80"

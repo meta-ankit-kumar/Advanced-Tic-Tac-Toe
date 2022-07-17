@@ -80,7 +80,7 @@ export const Toss = ({ firstPlayerName, secondPlayerName }) => {
 			</div>
 			<>
 				<div className='button-container'>
-					<Button onClick={() => handleButtonClick()} color='success' variant="outlined">Toss</Button>
+					<Button className='toss-button' onClick={() => handleButtonClick()} color='success' variant="outlined">Toss</Button>
 				</div>
 			</>
 		</>

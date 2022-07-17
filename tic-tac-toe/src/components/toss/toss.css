@@ -6,7 +6,7 @@
 
 @keyframes rotate-and-transform-coin {
 	30% {
-		transform: translateY(-400px) rotateX(1260deg);
+		transform: translateY(-200px) rotateX(1259deg);
 	}
 	100% {
 		transform: translateY(0px) rotateX(0deg);
@@ -19,7 +19,7 @@
 	width: 100%;
 	align-items: flex-end;
 	justify-content: center;
-	height: 80vh;
+	height: 70vh;
 }
 
 .button-container {
@@ -27,5 +27,26 @@
 	width: 100%;
 	align-items: center;
 	justify-content: center;
-	
+}
+
+.toss-button {
+	animation-name: border-animation;
+	animation-duration: 6s;
+	animation-iteration-count: infinite;
+	width: 20%;
+}
+
+@keyframes border-animation {
+	0% {
+		border-image: linear-gradient(90deg, rgb(184, 145, 235) , rgb(253, 134, 37));
+		border-image-slice: 1;
+	}
+	80% {
+		border-image: linear-gradient(90deg, rgb(187, 238, 129) , rgb(247, 247, 160));
+		border-image-slice: 1;
+	}
+	100% {
+		border-image: linear-gradient(90deg, rgb(184, 145, 235) , rgb(253, 134, 37));
+		border-image-slice: 1;
+	}
 }

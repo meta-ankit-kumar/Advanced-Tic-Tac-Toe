@@ -1,0 +1,25 @@
+.player-name {
+	color: rgb(168, 0, 247);
+}
+
+.toss-selection {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	height: 50vh;
+}
+
+.choice-section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.choice-section button {
+	width: 60%;
+	margin: 0.5rem;
+}
+
+

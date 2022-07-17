@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { PAGE_NAME } from '../../shared/constants';
 import { Form } from '../form/form.component';
 import { Game } from '../game/game.component';
+import { PlayVsComputer } from '../playVsComputer/playVsComputer.component';
+import { PlayVsFriend } from '../playVsFriend/playVsFriend.component';
 import { Selection } from '../selection/selection.component';
 // import Loading from '../loading/loading.component';
 
@@ -19,16 +21,16 @@ export const Main = () => {
 		switch (currentPage) {
 		case PAGE_NAME.FORM:
 			return (
-				<Form name={name} setName={setName} setCurrentPage={setCurrentPage}/>
+				<Form name={name} setName={setName} placeholder='Your name' setCurrentPage={setCurrentPage}/>
 			);
 		case PAGE_NAME.GAME:
 			return (<Game name={name}/>);
 		case PAGE_NAME.SELECTION:
 			return (<Selection name={name} setCurrentPage={setCurrentPage}/>);
 		case PAGE_NAME.PLAY_VS_FRIEND:
-			return (<h1>Play With Friend</h1>);
+			return (<PlayVsFriend firstPlayerName={name}/>);
 		case PAGE_NAME.PLAY_VS_COMPUTER:
-			return (<h1>Play With Computer</h1>);
+			return (<PlayVsComputer/>);
 		default:
 			break;
 		}

@@ -1,7 +1,11 @@
 import { PAGE_NAME } from '../../shared/constants';
 
-export const handleSubmit = (name, setCurrentPage) => {
-	setCurrentPage(PAGE_NAME.SELECTION);
+export const handleSubmit = (name, setCurrentPage, setName, ignoreFirstTime) => {
+	ignoreFirstTime.value = true;
+	setName(name);
+	if (setCurrentPage)
+		setCurrentPage(PAGE_NAME.SELECTION);
+	
 };
 
 export const isSubmitButtonDisabled = (name) => {

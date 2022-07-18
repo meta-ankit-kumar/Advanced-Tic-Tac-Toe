@@ -1,0 +1,22 @@
+.item {
+	border: 1px solid;
+	border-color: rgb(255, 168, 127);
+	text-align: center;
+	padding: 25% 0;
+	animation: border-animation 15s infinite;
+}
+
+@keyframes border-animation {
+	0% {
+		border-image: linear-gradient(90deg, rgb(184, 145, 235) , rgb(253, 134, 37));
+		border-image-slice: 1;
+	}
+	80% {
+		border-image: linear-gradient(90deg, rgb(187, 238, 129) , rgb(247, 247, 160));
+		border-image-slice: 1;
+	}
+	100% {
+		border-image: linear-gradient(90deg, rgb(184, 145, 235) , rgb(253, 134, 37));
+		border-image-slice: 1;
+	}
+}

@@ -5,6 +5,7 @@ import { Game } from '../game/game.component';
 import { PlayVsComputer } from '../playVsComputer/playVsComputer.component';
 import { PlayVsFriend } from '../playVsFriend/playVsFriend.component';
 import { Selection } from '../selection/selection.component';
+import { Board } from '../board/board.component';
 // import Loading from '../loading/loading.component';
 
 
@@ -36,6 +37,7 @@ export const Main = () => {
 		}
 	};
 	return (
-		getComponentAccordingToCurrentPage(currentPage)
+		<Board/>
+		// getComponentAccordingToCurrentPage(currentPage)
 	);
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { PAGE_NAME } from '../../shared/constants';
 import { Form } from '../form/form.component';
@@ -5,6 +6,8 @@ import { Game } from '../game/game.component';
 import { PlayVsComputer } from '../playVsComputer/playVsComputer.component';
 import { PlayVsFriend } from '../playVsFriend/playVsFriend.component';
 import { Selection } from '../selection/selection.component';
+import { Board } from '../board/board.component';
+import { Announcement } from '../announcement/announcement.component';
 // import Loading from '../loading/loading.component';
 
 
@@ -36,6 +39,8 @@ export const Main = () => {
 		}
 	};
 	return (
+		// <Announcement winnerName={'Ankit'}/>
+		// <Board/>
 		getComponentAccordingToCurrentPage(currentPage)
 	);
 };

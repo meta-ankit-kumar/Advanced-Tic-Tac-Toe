@@ -7,6 +7,7 @@ import front from '../../assets/images/coin-front.png';
 import back from '../../assets/images/coin-back.png';
 import { TossSelection } from '../tossSelection/tossSelection.component';
 import 'react-toastify/dist/ReactToastify.css';
+import { wait } from '../../shared/utils';
 
 const getStyleClass = (tossState) => {
 	switch (tossState) {
@@ -27,12 +28,6 @@ const getCoinAccordingToTheResult = (tossState) => {
 	return front;
 };
 
-const wait = async (time) => {
-	return new Promise(resolve => {
-		setTimeout(resolve, time);
-	});
-};
-
 const tossCoin = async () => {
 	console.log('In tossCoin function');
 	await wait(4800);
@@ -44,7 +39,7 @@ const tossCoin = async () => {
 
 
 // eslint-disable-next-line react/prop-types
-export const Toss = ({ firstPlayerName, secondPlayerName }) => {
+export const Toss = ({ firstPlayerName, secondPlayerName, setTossWinner }) => {
 	const [tossState, setTossState] = useState('NOT_STARTED');
 	const [firstPlayerChoice, setFirstPlayerChoice] = useState(undefined);
 
@@ -53,10 +48,16 @@ export const Toss = ({ firstPlayerName, secondPlayerName }) => {
 		const result = await tossCoin();
 		console.log('Result', result);
 		setTossState(result);
-		if (result.split('_')[0].includes(firstPlayerChoice.toUpperCase()))
+		if (result.split('_')[0].includes(firstPlayerChoice.toUpperCase())) {
 			toast.success(`${firstPlayerName} has won the toss`);
-		else
+			await wait(4000);
+			setTossWinner(1);
+		}
+		else {
 			toast.success(`${secondPlayerName} has won the toss`);
+			await wait(4000);
+			setTossWinner(2);
+		}
 	};
 
 	useEffect(() => {

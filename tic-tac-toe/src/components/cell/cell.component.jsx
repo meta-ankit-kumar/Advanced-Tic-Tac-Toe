@@ -1,10 +1,21 @@
 import './cell.css';
+
+const setChoice = (id, text, setUserChoice, symbol) => {
+	if (text.length) return;
+	setUserChoice({id, text: symbol.toUpperCase()});
+};
+
+const getStyleClass = (text) => {
+	if (!text.length)
+		return 'item empty';
+	return 'item filled';
+};
+
 export const Cell = ({
 	// eslint-disable-next-line react/prop-types
-	id, text
+	id, text, setUserChoice, symbol
 }) => {
-	console.log('In cell component', id, text);
 	return (
-		<div className='item'>{text}{id}</div>
+		<div onClick={() => setChoice(id, text, setUserChoice, symbol)} className={getStyleClass(text)}>{text}</div>
 	);
 };

@@ -3,7 +3,34 @@
 	border-color: rgb(255, 168, 127);
 	text-align: center;
 	padding: 25% 0;
+	font-size: 2rem;
+	font-weight: bold;
+	text-decoration: solid;
 	animation: border-animation 15s infinite;
+	height: 0.7rem;
+}
+
+.empty:hover {
+	transform: scale(1.013);
+}
+
+.filled {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 7vw;
+}
+
+.filled:hover {
+	animation: shake-cell 0.2s;
+	animation-iteration-count: calc(3);
+}
+@keyframes shake-cell {
+	0% { transform: rotate(0deg); }
+  	25% { transform: rotate(1deg); }
+  	50% { transform: rotate(0deg); }
+  	75% { transform: rotate(-1deg); }
+  	100% { transform: rotate(0deg); }
 }
 
 @keyframes border-animation {

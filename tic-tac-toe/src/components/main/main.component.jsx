@@ -41,6 +41,7 @@ export const Main = () => {
 	return (
 		// <Announcement winnerName={'Ankit'}/>
 		// <Board/>
-		getComponentAccordingToCurrentPage(currentPage)
+		// getComponentAccordingToCurrentPage(currentPage)
+		<PlayVsFriend firstPlayerName={'Ankit Bishnoi'} vsComputer={true}/>
 	);
 };

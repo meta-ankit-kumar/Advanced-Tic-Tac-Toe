@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Advanced-Tic-Tac-Toe/static/css/main.881372b4.css",
-    "main.js": "/Advanced-Tic-Tac-Toe/static/js/main.35dcd22a.js",
+    "main.js": "/Advanced-Tic-Tac-Toe/static/js/main.ee193f3e.js",
     "static/js/787.393238a3.chunk.js": "/Advanced-Tic-Tac-Toe/static/js/787.393238a3.chunk.js",
     "static/media/coin-front.png": "/Advanced-Tic-Tac-Toe/static/media/coin-front.95bdfa1e6b2ef7426f93.png",
     "static/media/coin-back.png": "/Advanced-Tic-Tac-Toe/static/media/coin-back.6f30cf71e323a393dc5d.png",
     "index.html": "/Advanced-Tic-Tac-Toe/index.html",
     "main.881372b4.css.map": "/Advanced-Tic-Tac-Toe/static/css/main.881372b4.css.map",
-    "main.35dcd22a.js.map": "/Advanced-Tic-Tac-Toe/static/js/main.35dcd22a.js.map",
+    "main.ee193f3e.js.map": "/Advanced-Tic-Tac-Toe/static/js/main.ee193f3e.js.map",
     "787.393238a3.chunk.js.map": "/Advanced-Tic-Tac-Toe/static/js/787.393238a3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.881372b4.css",
-    "static/js/main.35dcd22a.js"
+    "static/js/main.ee193f3e.js"
   ]
 }

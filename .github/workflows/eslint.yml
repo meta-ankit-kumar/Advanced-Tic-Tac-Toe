@@ -33,6 +33,7 @@ jobs:
         run: |
           yarn add eslint@8.10.0
           yarn add @microsoft/eslint-formatter-sarif@2.1.7
+          yarn add eslint-plugin-react@latest
 
       - name: Run ESLint
         run: npx eslint .

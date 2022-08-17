@@ -7,7 +7,7 @@
 	font-weight: bold;
 	text-decoration: solid;
 	animation: border-animation 15s infinite;
-	height: 0.7rem;
+	height: 1rem;
 }
 
 .empty:hover {

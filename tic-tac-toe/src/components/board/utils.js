@@ -37,11 +37,16 @@ export const boardData = [
 	},
 ];
 
-export const checkResult = (boardInfo) => {
+const transformArray = (boardInfo) => {
 	const board = [];
 	for (let i = 0; i < 3; i++) {
 		board.push([...boardInfo.slice(i * 3, (i * 3) + 3)]);
 	}
+	return board;
+};
+
+export const checkResult = (boardInfo) => {
+	const board = transformArray(boardInfo);
 
 	if (board.every(rowInfo => rowInfo.every(cellInfo => !cellInfo.text.length)))	return formatResult(false);
 
@@ -125,3 +130,73 @@ const checkDiagonals = (board) => {
 };
 
 const formatResult = (result, winningSymbol, isTie = false) => ({result, winningSymbol, isTie});
+
+export const checkIfPlayerIsWinning = (boardInfo, playerSymbol) => {
+	const board = transformArray(boardInfo);
+
+	const rowWiseResults = [retrieveMatchingInfoForRow(board, 0, playerSymbol), retrieveMatchingInfoForRow(board, 1, playerSymbol), retrieveMatchingInfoForRow(board, 2, playerSymbol)];
+	const anyMatchForRow = rowWiseResults.find(result => result.result);
+	if (anyMatchForRow && anyMatchForRow.result)
+		return anyMatchForRow;
+	
+	const columnWiseResults = [retrieveMatchingInfoForColumn(board, 0, playerSymbol), retrieveMatchingInfoForColumn(board, 1, playerSymbol), retrieveMatchingInfoForColumn(board, 2, playerSymbol)];
+	const anyMatchForColumn = columnWiseResults.find(result => result.result);
+	if (anyMatchForColumn && anyMatchForColumn.result)
+		return anyMatchForColumn;
+
+	const anyMatchForDiagonal = retrieveMatchingInfoDiagonal(board, playerSymbol);
+	if (anyMatchForDiagonal && anyMatchForDiagonal.result)
+		return anyMatchForDiagonal;
+	
+	const anyMatchForReverseDiagonal = retrieveMatchingInfoReverseDiagonal(board, playerSymbol);
+	if (anyMatchForReverseDiagonal && anyMatchForReverseDiagonal.result)
+		return anyMatchForReverseDiagonal;
+	
+	return formatWinningCellInfo(false);
+};
+
+const retrieveMatchingInfoReverseDiagonal = (board, playerSymbol) => {
+	if (board[0][2].text === playerSymbol && board[1][1].text === playerSymbol && !board[2][0].text.length)
+		return formatWinningCellInfo(true, retrieveIdOfTheCell(2, 0));
+	else if (board[0][2].text === playerSymbol && board[2][0].text === playerSymbol && !board[1][1].text.length)
+		return formatWinningCellInfo(true, retrieveIdOfTheCell(1, 1));
+	else if (board[1][1].text === playerSymbol && board[2][0].text === playerSymbol && !board[0][2].text.length)
+		return formatWinningCellInfo(true, retrieveIdOfTheCell(0, 2));
+	return formatWinningCellInfo(false);
+};
+
+const retrieveMatchingInfoDiagonal = (board, playerSymbol) => {
+	if (board[0][0].text === playerSymbol && board[1][1].text === playerSymbol && !board[2][2].text.length)
+		return formatWinningCellInfo(true, retrieveIdOfTheCell(2, 2));
+	else if (board[0][0].text === playerSymbol && board[2][2].text === playerSymbol && !board[1][1].text.length)
+		return formatWinningCellInfo(true, retrieveIdOfTheCell(1, 1));
+	else if (board[1][1].text === playerSymbol && board[2][2].text === playerSymbol && !board[0][0].text.length)
+		return formatWinningCellInfo(true, retrieveIdOfTheCell(0, 0));
+	return formatWinningCellInfo(false);
+};
+
+const retrieveMatchingInfoForColumn = (board, column, playerSymbol) => {
+	if (board[0][column].text === playerSymbol && board[1][column].text === playerSymbol && !board[2][column].text.length)
+		return formatWinningCellInfo(true, retrieveIdOfTheCell(2, column));
+	else if (board[0][column].text === playerSymbol && board[2][column].text === playerSymbol && !board[1][column].text.length)
+		return formatWinningCellInfo(true, retrieveIdOfTheCell(1, column));
+	else if (board[1][column].text === playerSymbol && board[2][column].text === playerSymbol && !board[0][column].text.length)
+		return formatWinningCellInfo(true, retrieveIdOfTheCell(0, column));
+	return formatWinningCellInfo(false);
+};
+
+const retrieveMatchingInfoForRow = (board, row, playerSymbol) => {
+	if (board[row][0].text === playerSymbol && board[row][1].text === playerSymbol && !board[row][2].text.length)
+		return formatWinningCellInfo(true, retrieveIdOfTheCell(row, 2));
+	else if (board[row][0].text === playerSymbol && board[row][2].text === playerSymbol && !board[row][1].text.length)
+		return formatWinningCellInfo(true, retrieveIdOfTheCell(row, 1));
+	else if (board[row][1].text === playerSymbol && board[row][2].text === playerSymbol && !board[row][0].text.length)
+		return formatWinningCellInfo(true, retrieveIdOfTheCell(row, 0));
+	return formatWinningCellInfo(false);
+};
+
+export const retrieveIdOfTheCell = (row, column) => {
+	return (3 * row + column + 1);
+};
+
+const formatWinningCellInfo = (result, cellInfo) => ({result, cellInfo});

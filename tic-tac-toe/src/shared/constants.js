@@ -10,3 +10,5 @@ export const PAGE_NAME = {
 	PLAY_VS_FRIEND: USER_CHOICE.A_FRIEND.description,
 	PLAY_VS_COMPUTER: USER_CHOICE.THE_COMPUTER.description
 };
+
+export const PRIORITY_CELLS_FOR_COMPUTER = [5, 1, 3, 7, 9];

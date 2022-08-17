@@ -42,5 +42,6 @@ export const Main = () => {
 		// <Announcement winnerName={'Ankit'}/>
 		// <Board/>
 		getComponentAccordingToCurrentPage(currentPage)
+		// <PlayVsFriend firstPlayerName={'Ankit Bishnoi'} vsComputer={true}/>
 	);
 };

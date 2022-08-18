@@ -31,9 +31,9 @@ export const Main = () => {
 		case PAGE_NAME.SELECTION:
 			return (<Selection name={name} setCurrentPage={setCurrentPage}/>);
 		case PAGE_NAME.PLAY_VS_FRIEND:
-			return (<PlayVsFriend firstPlayerName={name}/>);
+			return (<PlayVsFriend firstPlayerName={name} vsComputer={false}/>);
 		case PAGE_NAME.PLAY_VS_COMPUTER:
-			return (<PlayVsComputer/>);
+			return (<PlayVsFriend firstPlayerName={name} vsComputer={true}/>);
 		default:
 			break;
 		}

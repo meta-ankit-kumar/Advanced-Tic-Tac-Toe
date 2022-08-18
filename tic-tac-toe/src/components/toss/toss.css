@@ -50,3 +50,7 @@
 		border-image-slice: 1;
 	}
 }
+
+.css-sxix9q-MuiButtonBase-root-MuiButton-root.Mui-disabled {
+	color: green !important;
+}

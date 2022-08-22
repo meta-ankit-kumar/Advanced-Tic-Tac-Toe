@@ -39,13 +39,13 @@ export const Form = ({ placeholder, setName, setCurrentPage}) => {
 	return (
 		<div className='form-component'>
 			<Grid sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', marginLeft: '15px'}}>
-				<div className='input-field'>
-					<TextField className='text-field' onInput={handleInput} variant="filled" placeholder={placeholder} color={getBorderColor(name)} inputProps={{ style: { color: 'white', fontSize: '2.5rem'} }} autoFocus focused />
-					<p className='errors-section'>{nameError}</p>
+				<div className='input-field form-fields'>
+					<TextField className='text-field' onInput={handleInput} variant="filled" placeholder={placeholder} color={getBorderColor(name)} inputProps={{ style: { color: 'white', fontSize: '2rem'} }} autoFocus focused />
+					{nameError && (<p className='errors-section'>{nameError}</p>)}
 				</div>
-				<div>
+				<div className='navigation-button'>
 					<Button type='submit' disabled={isSubmitButtonDisabled(name)} onClick={() => handleSubmit(name, setCurrentPage, setName, ignoreFirstTime)}>
-						<ChevronRightIcon sx={{ fontSize: '6rem'}} color={getBorderColor(name)}/>
+						<ChevronRightIcon sx={{ fontSize: '7rem'}} color={getBorderColor(name)}/>
 					</Button>
 				</div>
 			</Grid>

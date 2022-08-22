@@ -11,25 +11,18 @@ import { PRIORITY_CELLS_FOR_COMPUTER } from '../../shared/constants';
 let gameInfo = {};
 
 const setUserChoice = async (boardData, userChoice, setBoardData) => {
+	const currentPlayer = gameInfo[gameInfo[gameInfo.currentTurn]];
+	if (currentPlayer === 'Computer') return;
+
 	boardData.forEach(cellInfo => {
 		if (cellInfo.id === userChoice.id)
 			cellInfo.text = userChoice.text;
 	});
-	console.log('Set User choice called', userChoice);
 	gameInfo.currentTurn = gameInfo.currentTurn === 1 ? 2 : 1;
 	setBoardData([...boardData]);
-	console.log('after board data');
-	// if(await checkForWinner(boardData, setResult))
-	// 	return;
-	// const currentPlayer = gameInfo[gameInfo[gameInfo.currentTurn]];
-	// if (currentPlayer === 'Computer') {
-	// 	decideComputerMove(boardData, setBoardData, gameInfo[gameInfo.currentTurn]);
-	// 	checkForWinner(boardData, setResult);
-	// }
 };
 
 const checkForWinner = async (boardData, setResult) => {
-	console.log('Checking for the winner');
 	const isThereAnyWinner = checkResult(boardData);
 	if (isThereAnyWinner.result) {
 		await wait(1000);
@@ -48,25 +41,22 @@ const checkForWinner = async (boardData, setResult) => {
 		setResult(resultInfo);
 		return true;
 	}
-	console.log('There is no result till now');
 	return false;
 };
 
 const decideComputerMove = async (boardData, setBoardData, computerSymbol) => {
-	console.log('Deciding the computer move');
+	await wait(1000);
+	const currentPlayer = gameInfo[gameInfo[gameInfo.currentTurn]];
+	if (currentPlayer !== 'Computer') return;
 	gameInfo.currentTurn = gameInfo.currentTurn === 1 ? 2 : 1;
-	await wait(2000);
 	const checkIfComputerIsWinning = checkIfPlayerIsWinning(boardData, computerSymbol);
 	const checkIfOpponentIsWinning = checkIfPlayerIsWinning(boardData, ['X', 'O'].filter(x => x !== computerSymbol)[0]);
-	console.log({checkIfComputerIsWinning});
-	console.log({checkIfOpponentIsWinning});
 	if (checkIfComputerIsWinning.result)
 		boardData[checkIfComputerIsWinning.cellInfo - 1].text = computerSymbol;
 	else if (checkIfOpponentIsWinning.result)
 		boardData[checkIfOpponentIsWinning.cellInfo - 1].text = computerSymbol;
 	else {
 		const highestPriorityCell = retrievePriorityCell(boardData);
-		console.log('highestPriorityCell', highestPriorityCell);
 		if (highestPriorityCell) {
 			boardData[highestPriorityCell - 1].text = computerSymbol;
 		}
@@ -110,7 +100,6 @@ const renderBoard = (data, setBoardData, setResult) => {
 };
 
 const setPlayerInfo = (tossWinner, firstPlayerName, secondPlayerName) => {
-	console.log('Here in the funtion');
 	gameInfo.currentTurn = tossWinner;
 	if (tossWinner == 1) {
 		gameInfo[1] = 'X';
@@ -124,7 +113,6 @@ const setPlayerInfo = (tossWinner, firstPlayerName, secondPlayerName) => {
 		gameInfo['O'] = firstPlayerName;
 		gameInfo['X'] = secondPlayerName;
 	}
-	console.log('GAMEINFO in function', JSON.stringify(gameInfo));
 };
 
 // eslint-disable-next-line react/prop-types
@@ -143,10 +131,9 @@ export const Board = ({ tossWinner, firstPlayerName, secondPlayerName }) => {
 			}
 		};
 		computerMove();
-	}, [boardData]);
+	}, [gameInfo.currentTurn]);
 	if (!gameInfo.currentTurn)
 		setPlayerInfo(tossWinner, firstPlayerName, secondPlayerName);
-	console.log('gameinfo', JSON.stringify(gameInfo));
 	if (result) {
 		return (
 			<Announcement winnerName={result.winnerName} isTied={result.isTied}/>

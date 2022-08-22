@@ -3,5 +3,9 @@
 }
 
 .input-field {
-	height: 8.5em;
+	height: 6em;
+}
+
+.navigation-button {
+	margin-top: 0.4rem;
 }

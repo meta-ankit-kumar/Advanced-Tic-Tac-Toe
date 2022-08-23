@@ -9,7 +9,7 @@ export const PlayVsFriend = ({ firstPlayerName, vsComputer }) => {
 	const [tossWinner, setTossWinner] = useState('');
 	if (tossWinner) {
 		return (
-			<Board tossWinner={tossWinner} firstPlayerName={firstPlayerName} secondPlayerName={vsComputer ? 'Computer' : friendName}/>
+			<Board tossWinner={tossWinner} firstPlayerName={firstPlayerName} secondPlayerName={vsComputer ? 'Computer' : friendName} vsComputer={vsComputer}/>
 		);
 	}
 	else if (friendName.length)

@@ -10,9 +10,10 @@ import { PRIORITY_CELLS_FOR_COMPUTER } from '../../shared/constants';
 
 let gameInfo = {};
 
-const setUserChoice = async (boardData, userChoice, setBoardData) => {
+const setUserChoice = async (boardData, userChoice, setBoardData, vsComputer) => {
+	console.log('setUserChoice called', vsComputer);
 	const currentPlayer = gameInfo[gameInfo[gameInfo.currentTurn]];
-	if (currentPlayer === 'Computer') return;
+	if (currentPlayer === 'Computer' && vsComputer) return;
 
 	boardData.forEach(cellInfo => {
 		if (cellInfo.id === userChoice.id)
@@ -47,7 +48,7 @@ const checkForWinner = async (boardData, setResult) => {
 const decideComputerMove = async (boardData, setBoardData, computerSymbol) => {
 	await wait(1000);
 	const currentPlayer = gameInfo[gameInfo[gameInfo.currentTurn]];
-	if (currentPlayer !== 'Computer') return;
+	if (currentPlayer !== 'Computer' ) return;
 	gameInfo.currentTurn = gameInfo.currentTurn === 1 ? 2 : 1;
 	const checkIfComputerIsWinning = checkIfPlayerIsWinning(boardData, computerSymbol);
 	const checkIfOpponentIsWinning = checkIfPlayerIsWinning(boardData, ['X', 'O'].filter(x => x !== computerSymbol)[0]);
@@ -75,11 +76,11 @@ const retrievePriorityCell = (boardData) => {
 	return PRIORITY_CELLS_FOR_COMPUTER.find(priorityCellInfo => !boardData[priorityCellInfo - 1].text.length);
 };
 
-const renderBoard = (data, setBoardData, setResult) => {
+const renderBoard = (data, setBoardData, setResult, vsComputer) => {
 	const cells = data.map(cellInfo => {
 		return (
 			<Grid key={cellInfo.id} item xs={4}>
-				<Cell id={cellInfo.id} text={cellInfo.text} symbol={gameInfo[gameInfo.currentTurn]} setUserChoice={(userChoice) => setUserChoice(data, userChoice, setBoardData, setResult)}/>
+				<Cell id={cellInfo.id} text={cellInfo.text} symbol={gameInfo[gameInfo.currentTurn]} setUserChoice={(userChoice) => setUserChoice(data, userChoice, setBoardData, vsComputer)}/>
 			</Grid>
 		);
 	});
@@ -116,8 +117,8 @@ const setPlayerInfo = (tossWinner, firstPlayerName, secondPlayerName) => {
 };
 
 // eslint-disable-next-line react/prop-types
-export const Board = ({ tossWinner, firstPlayerName, secondPlayerName }) => {
-	console.log({secondPlayerName});
+export const Board = ({ tossWinner, firstPlayerName, secondPlayerName, vsComputer }) => {
+	console.log({vsComputer});
 	const [boardData, setBoardData] = useState(data);
 	const [result, setResult] = useState('');
 	useEffect(() => {
@@ -125,7 +126,7 @@ export const Board = ({ tossWinner, firstPlayerName, secondPlayerName }) => {
 			const result = await checkForWinner(boardData, setResult);
 			if (result) return;
 			const currentPlayer = gameInfo[gameInfo[gameInfo.currentTurn]];
-			if (currentPlayer === 'Computer' && !Object.keys(result).length) {
+			if (currentPlayer === 'Computer' && vsComputer && !Object.keys(result).length) {
 				await decideComputerMove(boardData, setBoardData, gameInfo[gameInfo.currentTurn]);
 				await checkForWinner(boardData, setResult);
 			}
@@ -140,6 +141,6 @@ export const Board = ({ tossWinner, firstPlayerName, secondPlayerName }) => {
 		);
 	}
 	return (
-		renderBoard(boardData, setBoardData, setResult)
+		renderBoard(boardData, setBoardData, setResult, vsComputer)
 	);
 };

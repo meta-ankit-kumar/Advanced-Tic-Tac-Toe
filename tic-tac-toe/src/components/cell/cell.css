@@ -1,12 +1,12 @@
 .item {
-	border: 1px solid;
-	border-color: rgb(255, 168, 127);
+	border: 1px #ffffff solid;
+	border-radius: 5%;
 	text-align: center;
 	padding: 3.5rem 0;
 	font-size: 2rem;
 	font-weight: bold;
 	text-decoration: solid;
-	animation: border-animation 15s infinite;
+	/* animation: border-animation 15s infinite; */
 	height: 1rem;
 }
 
@@ -46,4 +46,9 @@
 		border-image: linear-gradient(90deg, rgb(184, 145, 235) , rgb(253, 134, 37));
 		border-image-slice: 1;
 	}
+}
+
+.winning {
+	color: green;
+	border: 2px solid #32ff0b;
 }

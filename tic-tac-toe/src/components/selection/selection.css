@@ -13,6 +13,10 @@
 	padding-top: 8%;
 }
 
+.name {
+	color: gold
+}
+
 .selection-container {
 	height: 100vh;
 	display: flex;

@@ -9,7 +9,7 @@ export const Selection = ({ name, setCurrentPage }) => {
 			<div>
 				<div>
 					<Typography className='container' variant="h3" component="div" gutterBottom>
-						Hi {name}!!!
+						Hi,&nbsp;<Typography className='name' variant="h3">{name}</Typography> !!!
 					</Typography>
 					<Typography className='container info-message' variant="h4" component="div" gutterBottom>
 						Play<Typography variant='h4' className="selection-heading">TIC-TAC-TOE</Typography>vs

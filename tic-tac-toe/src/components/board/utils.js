@@ -200,3 +200,22 @@ export const retrieveIdOfTheCell = (row, column) => {
 };
 
 const formatWinningCellInfo = (result, cellInfo) => ({result, cellInfo});
+
+export const findWinningCells = (boardInfo) => {
+	const board = transformArray(boardInfo);
+
+	const firstCellInfo = board[0][0].text;
+	if ([board[0][1].text, board[0][2].text].every(cellInfo => cellInfo === firstCellInfo))	return [0, 1, 2];
+	if ([board[1][0].text, board[2][0].text].every(cellInfo => cellInfo === firstCellInfo))	return [0, 3, 6];
+	if ([board[1][1].text, board[2][2].text].every(cellInfo => cellInfo === firstCellInfo))	return [0, 4, 8];
+
+	const firstRowLastCellInfo = board[0][2].text;
+	if ([board[1][1].text, board[2][0].text].every(cellInfo => cellInfo === firstRowLastCellInfo))	return [2, 4, 6];
+	if ([board[1][2].text, board[2][2].text].every(cellInfo => cellInfo === firstRowLastCellInfo))	return [2, 5, 8];
+
+	const middleRowLastCellInfo = board[1][2].text;
+	if ([board[1][1].text, board[1][0].text].every(cellInfo => cellInfo === middleRowLastCellInfo))	return [3, 4, 5];
+
+	const lastRowFirstCellInfo = board[2][0].text;
+	if ([board[2][1].text, board[2][2].text].every(cellInfo => cellInfo === lastRowFirstCellInfo))	return [6, 7, 8];
+};

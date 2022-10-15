@@ -4,12 +4,12 @@ import { Toss } from '../toss/toss.component';
 import { Board } from '../board/board.component';
 
 // eslint-disable-next-line react/prop-types
-export const PlayVsFriend = ({ firstPlayerName, vsComputer }) => {
+export const PlayVsFriend = ({ firstPlayerName, vsComputer, setCurrentPage }) => {
 	const [friendName, setFriendName] = useState('');
 	const [tossWinner, setTossWinner] = useState('');
 	if (tossWinner) {
 		return (
-			<Board tossWinner={tossWinner} firstPlayerName={firstPlayerName} secondPlayerName={vsComputer ? 'Computer' : friendName} vsComputer={vsComputer}/>
+			<Board tossWinner={tossWinner} firstPlayerName={firstPlayerName} secondPlayerName={vsComputer ? 'Computer' : friendName} vsComputer={vsComputer} setCurrentPage={setCurrentPage} setTossWinner={setTossWinner}/>
 		);
 	}
 	else if (friendName.length)

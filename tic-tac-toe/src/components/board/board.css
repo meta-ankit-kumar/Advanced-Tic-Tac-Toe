@@ -8,6 +8,15 @@
 }
 
 .cell-container {
-	border: 2px solid white;
-	box-shadow: 0px 5px 50px 1px khaki;
+	box-shadow: 0px 0px 5px 1px #9ea2af;
+	border-radius: 3%;
+}
+
+.action-button-container {
+	display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    margin: 1rem;
 }

@@ -20,6 +20,8 @@ export const Main = () => {
 	const [name, setName] = useState('');
 	const [currentPage, setCurrentPage] = useState(PAGE_NAME.FORM);
 
+	console.log('currentPage', currentPage);
+
 	const getComponentAccordingToCurrentPage = (currentPage) => {
 		switch (currentPage) {
 		case PAGE_NAME.FORM:
@@ -31,9 +33,9 @@ export const Main = () => {
 		case PAGE_NAME.SELECTION:
 			return (<Selection name={name} setCurrentPage={setCurrentPage}/>);
 		case PAGE_NAME.PLAY_VS_FRIEND:
-			return (<PlayVsFriend firstPlayerName={name} vsComputer={false}/>);
+			return (<PlayVsFriend firstPlayerName={name} vsComputer={false} setCurrentPage={setCurrentPage}/>);
 		case PAGE_NAME.PLAY_VS_COMPUTER:
-			return (<PlayVsFriend firstPlayerName={name} vsComputer={true}/>);
+			return (<PlayVsFriend firstPlayerName={name} vsComputer={true} setCurrentPage={setCurrentPage}/>);
 		default:
 			break;
 		}

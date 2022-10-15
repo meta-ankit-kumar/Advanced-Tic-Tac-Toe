@@ -1,12 +1,13 @@
 import { Cell } from '../cell/cell.component';
 import { Grid } from '@mui/material';
-import { boardData as data, checkIfPlayerIsWinning, checkResult} from './utils';
+import { boardData as data, checkIfPlayerIsWinning, checkResult, findWinningCells} from './utils';
 import { useState, useEffect } from 'react';
 import { Info } from '../info/info.component';
 import { Announcement } from '../announcement/announcement.component';
 import './board.css';
 import { wait } from '../../shared/utils';
-import { PRIORITY_CELLS_FOR_COMPUTER } from '../../shared/constants';
+import { PAGE_NAME, PRIORITY_CELLS_FOR_COMPUTER } from '../../shared/constants';
+import { ActionButton } from '../actionButton/actionButton.component';
 
 let gameInfo = {};
 
@@ -28,7 +29,8 @@ const checkForWinner = async (boardData, setResult) => {
 	if (isThereAnyWinner.result) {
 		await wait(1000);
 		const resultInfo = {
-			winnerName: gameInfo[isThereAnyWinner.winningSymbol]
+			winnerName: gameInfo[isThereAnyWinner.winningSymbol],
+			winningCellsIds: findWinningCells(boardData)
 		};
 		setResult(resultInfo);
 		return true;
@@ -76,11 +78,13 @@ const retrievePriorityCell = (boardData) => {
 	return PRIORITY_CELLS_FOR_COMPUTER.find(priorityCellInfo => !boardData[priorityCellInfo - 1].text.length);
 };
 
-const renderBoard = (data, setBoardData, setResult, vsComputer) => {
+const renderBoard = (data, setBoardData, result, vsComputer, firstPlayerName, secondPlayerName, setCurrentPage, setTossWinner) => {
+	const hasGameFinished = Object.keys(result).length > 0;
+	console.log({hasGameFinished});
 	const cells = data.map(cellInfo => {
 		return (
 			<Grid key={cellInfo.id} item xs={4}>
-				<Cell id={cellInfo.id} text={cellInfo.text} symbol={gameInfo[gameInfo.currentTurn]} setUserChoice={(userChoice) => setUserChoice(data, userChoice, setBoardData, vsComputer)}/>
+				<Cell readOnly={hasGameFinished} winning={result.winningCellsIds && result.winningCellsIds.includes(cellInfo.id - 1)} id={cellInfo.id} text={cellInfo.text} symbol={gameInfo[gameInfo.currentTurn]} setUserChoice={(userChoice) => setUserChoice(data, userChoice, setBoardData, vsComputer)}/>
 			</Grid>
 		);
 	});
@@ -93,11 +97,19 @@ const renderBoard = (data, setBoardData, setResult, vsComputer) => {
 					</Grid>
 				</div>
 			</>
+			<>{result && <Announcement winnerName={result.winnerName} isTied={result.isTied} vsComputer={vsComputer} firstPlayerName={firstPlayerName} secondPlayerName={secondPlayerName}/>}</>
+			<>{result && <div className='action-button-container'><ActionButton eventHandler={() => setPageAndAllowRetoss(vsComputer,setCurrentPage, setTossWinner)} className='action-button-container' text='Play Again' variant='contained' type='success'/></div>}</>
 			<>
-				<Info currentTurn={gameInfo.currentTurn} X={gameInfo.X} O={gameInfo.O} numberToSymbolMapping={{1: gameInfo[1], 2: gameInfo[2]}}/>
+				{!result && <Info currentTurn={gameInfo.currentTurn} X={gameInfo.X} O={gameInfo.O} numberToSymbolMapping={{1: gameInfo[1], 2: gameInfo[2]}}/>}
 			</>
 		</>
 	);
+};
+
+const setPageAndAllowRetoss = (vsComputer, setCurrentPage, setTossWinner) => {
+	setCurrentPage(vsComputer ? PAGE_NAME.PLAY_VS_COMPUTER : PAGE_NAME.PLAY_VS_FRIEND);
+	setTossWinner('');
+	gameInfo = {};
 };
 
 const setPlayerInfo = (tossWinner, firstPlayerName, secondPlayerName) => {
@@ -117,12 +129,23 @@ const setPlayerInfo = (tossWinner, firstPlayerName, secondPlayerName) => {
 };
 
 // eslint-disable-next-line react/prop-types
-export const Board = ({ tossWinner, firstPlayerName, secondPlayerName, vsComputer }) => {
-	console.log({vsComputer});
-	const [boardData, setBoardData] = useState(data);
+export const Board = ({ tossWinner, firstPlayerName, secondPlayerName, vsComputer, setCurrentPage, setTossWinner }) => {
+	console.log({setCurrentPage});
+	const [boardData, setBoardData] = useState(structuredClone(data));
 	const [result, setResult] = useState('');
+
+	// const resetBoard = async () => {
+	// 	console.log('reset board called');
+	// 	setBoardData(structuredClone(data));
+	// 	setResult('');
+	// 	const currentPlayer = gameInfo[gameInfo[gameInfo.currentTurn]];
+	// 	if (currentPlayer === 'Computer' && vsComputer)
+	// 		await decideComputerMove(boardData, setBoardData, gameInfo[gameInfo.currentTurn]);
+	// };
+
 	useEffect(() => {
 		const computerMove = async () => {
+			console.log('In use effect computer move function');
 			const result = await checkForWinner(boardData, setResult);
 			if (result) return;
 			const currentPlayer = gameInfo[gameInfo[gameInfo.currentTurn]];
@@ -135,12 +158,8 @@ export const Board = ({ tossWinner, firstPlayerName, secondPlayerName, vsCompute
 	}, [gameInfo.currentTurn]);
 	if (!gameInfo.currentTurn)
 		setPlayerInfo(tossWinner, firstPlayerName, secondPlayerName);
-	if (result) {
-		return (
-			<Announcement winnerName={result.winnerName} isTied={result.isTied}/>
-		);
-	}
+
 	return (
-		renderBoard(boardData, setBoardData, setResult, vsComputer)
+		renderBoard(boardData, setBoardData, result, vsComputer, firstPlayerName, secondPlayerName, setCurrentPage, setTossWinner)
 	);
 };
